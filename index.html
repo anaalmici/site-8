@@ -386,8 +386,9 @@ html.dark .ctrl-btn{background:rgba(40,33,50,.65); border-color:rgba(255,255,255
   display:grid; grid-template-columns:150px 1fr; gap:2rem;
 }
 /* Evita que elementos internos forcem overflow da grid (problema comum em layouts responsivos) */
-.player{position:relative; overflow:hidden;}
+.player{position:relative; overflow:visible;}
 .player > *{min-width:0;} 
+.pc-play{position:relative; z-index:4;} 
 .player-art{
   width:150px; height:150px; border-radius:16px;
   background:linear-gradient(135deg,var(--pink-deep),var(--blue-deep));
@@ -573,7 +574,9 @@ footer{
     padding:1rem;
     align-items:center;
     text-align:center;
-    overflow:hidden; /* evita que ícones escapem da caixa */
+    /* permitir sombras ventilarem e evitar corte visual */
+    overflow:visible;
+    padding-bottom:1.6rem; /* espaço extra para botão central */
   }
   .player-art{width:min(140px,32vw); height:min(140px,32vw); margin:0 auto;}
   .player-track, .player-artist{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
