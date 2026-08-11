@@ -385,6 +385,9 @@ html.dark .ctrl-btn{background:rgba(40,33,50,.65); border-color:rgba(255,255,255
   max-width:640px; margin:0 auto;
   display:grid; grid-template-columns:150px 1fr; gap:2rem;
 }
+/* Evita que elementos internos forcem overflow da grid (problema comum em layouts responsivos) */
+.player{position:relative; overflow:hidden;}
+.player > *{min-width:0;} 
 .player-art{
   width:150px; height:150px; border-radius:16px;
   background:linear-gradient(135deg,var(--pink-deep),var(--blue-deep));
