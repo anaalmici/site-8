@@ -561,6 +561,23 @@ footer{
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001s !important; transition-duration:.001s !important;}
 }
+
+/* RESPONSIVO: corrigir posicionamento dos controles do player em telas pequenas */
+@media (max-width:520px){
+  .player{
+    grid-template-columns:1fr; /* empilha arte e controles */
+    gap:1rem;
+    padding:1rem;
+    align-items:center;
+    text-align:center;
+    overflow:hidden; /* evita que ícones escapem da caixa */
+  }
+  .player-art{width:min(140px,32vw); height:min(140px,32vw); margin:0 auto;}
+  .player-track, .player-artist{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .player-controls{justify-content:center; gap:.75rem;}
+  .pc-btn{font-size:1.05rem; padding:.15rem .35rem;}
+  .pc-play{width:48px; height:48px; font-size:1.05rem;}
+}
 </style>
 </head>
 <body>
