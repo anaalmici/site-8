@@ -983,15 +983,24 @@ function updateCounters(){
   const mins = Math.floor((totalSec%3600)/60);
   const secs = totalSec%60;
 
-  let years = now.getFullYear()-start.getFullYear();
-  let months = now.getMonth()-start.getMonth();
-  let d = now.getDate()-start.getDate();
-  if(d<0){months--; }
-  if(months<0){years--; months+=12;}
+  // cálculo preciso de anos, meses e dias restantes desde a data de início
+  let years = now.getFullYear() - start.getFullYear();
+  let months = now.getMonth() - start.getMonth();
+  let daysRem;
+
+  if (now.getDate() >= start.getDate()) {
+    daysRem = now.getDate() - start.getDate();
+  } else {
+    // empresta um mês para calcular os dias restantes corretamente
+    months--;
+    const prevMonthLastDay = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    daysRem = prevMonthLastDay - (start.getDate() - now.getDate());
+  }
+  if (months < 0) { years--; months += 12; }
 
   $("#hy").textContent = years;
   $("#hm").textContent = months;
-  $("#hd").textContent = days % 30 >= 0 ? Math.floor((diffMs/86400000) % 30.44) : 0;
+  $("#hd").textContent = daysRem;
 
   $("#cDays").textContent = days.toLocaleString("pt-BR");
   $("#cHours").textContent = String(hours).padStart(2,"0");
